@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 // GET request for sign up form
@@ -49,16 +50,30 @@ exports.postSignUpForm = [
     });
 
     const errors = validationResult(req);
+    // check for errors in form validation
     if (!errors.isEmpty()) {
-      // got some errors in form validation
       res.render('signUpForm', {
         errors: errors.mapped(),
         passwordConfirm: req.body.passwordConfirm,
         newUser,
       });
     } else {
-      // form passed input validation
-      res.send('SUCCESS!');
+      bcrypt.hash(req.body.password, 10, async (hashError, hashedPass) => {
+        if (hashError) {
+          // problem hashing the password
+          next(hashError);
+        } else {
+          try {
+            // use hashed password & save new user to database
+            newUser.password = hashedPass;
+            await newUser.save();
+            res.send('SUCCESS!');
+          } catch (err) {
+            // problem saving user to database
+            next(err);
+          }
+        }
+      });
     }
   }),
 ];
