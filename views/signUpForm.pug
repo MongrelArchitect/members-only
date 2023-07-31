@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  h1 Sign-Up
+  form(action='' method='POST')
+    label(for='firstName') First Name
+      input#firstName(
+        name='firstName' 
+        type='text' 
+        value= newUser ? newUser.firstName : ''
+      )
+      div= errors && errors.firstName ? errors.firstName.msg : ''
+    label(for='lastName') Last Name
+      input#lastName(
+        name='lastName' 
+        type='text' 
+        value= newUser ? newUser.lastName : ''
+      )
+      div= errors && errors.lastName ? errors.lastName.msg : ''
+    label(for='email') Email
+      input#email(
+        name='email' 
+        type='email' 
+        value= newUser ? newUser.email : ''
+      )
+      div= errors && errors.email ? errors.email.msg : ''
+    label(for='password') Password
+      ul#passwordRequirements(aria-label='password requirements')
+        li 8 characters minimum
+        li At least 1 lowercase letter
+        li At least 1 uppercase letter
+        li At least 1 number
+        li At least 1 symbol
+      -// '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9]).{8,}$'
+      input#password(
+        aria-describedby='passwordRequirements'
+        name='password' 
+        type='password' 
+        value= newUser ? newUser.password : ''
+      )
+      div= errors && errors.password ? errors.password.msg : ''
+    label(for='passwordConfirm') Confirm Password
+      input#passwordConfirm(
+        name='passwordConfirm' 
+        type='password' 
+        value= passwordConfirm || ''
+      )
+      div= errors && errors.passwordConfirm ? errors.passwordConfirm.msg : ''
+    button(type='submit') Submit
