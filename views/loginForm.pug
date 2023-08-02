@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 Login
+  form(action='' method='POST')
+    label(for='email') Email
+      input#email(
+        name='email'
+        type='email'
+      )
+      div= errors && errors.email ? errors.email.msg : ''
+    label(for='password') Password 
+      input#password(
+        name='password'
+        type='password'
+      )
+      div= errors && errors.password ? errors.password.msg : ''
+    div= errors && errors.auth ? errors.auth.msg : ''
+    button(type='submit') Submit
