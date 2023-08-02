@@ -4,11 +4,9 @@ const express = require('express');
 const flash = require('express-flash');
 const session = require('express-session');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const User = require('./models/user');
+const setupPassport = require('./util/passport');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
@@ -34,45 +32,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-passport.use(
-  new LocalStrategy(
-    { usernameField: 'email' },
-    async (email, password, done) => {
-      const user = await User.findOne({ email });
-      try {
-        if (!user) {
-          return done(null, false, { message: 'no such user' });
-        }
-        const correctPassword = await bcrypt.compare(password, user.password);
-        if (!correctPassword) {
-          return done(null, false, { message: 'incorrect password' });
-        }
-        return done(null, user);
-      } catch (err) {
-        return done(err);
-      }
-    },
-  ),
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (e) {
-    done(e);
-  }
-});
+setupPassport(passport);
 
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      // about 1 day
+      maxAge: 87654321,
+    },
   }),
 );
 app.use(passport.initialize());

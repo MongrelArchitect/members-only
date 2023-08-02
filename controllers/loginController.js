@@ -6,6 +6,7 @@ const { body, validationResult } = require('express-validator');
 exports.getLoginForm = (req, res, next) => {
   const errorMessage = req.session.flash.error;
   res.render('loginForm', {
+    // give it the same error message structure as express-validator
     errors: errorMessage ? { auth: { msg: errorMessage } } : null,
   });
 };
