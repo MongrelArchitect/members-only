@@ -15,6 +15,7 @@ const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
 const joinRouter = require('./routes/join');
 const adminRouter = require('./routes/admin');
+const deleteRouter = require('./routes/delete');
 
 // set up mongoose
 mongoose.set('strictQuery', true);
@@ -60,6 +61,7 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/join', joinRouter);
 app.use('/admin', adminRouter);
+app.use('/delete', deleteRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

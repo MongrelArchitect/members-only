@@ -6,9 +6,15 @@ div.container-fluid.shadow.bg-white.rounded-3
         div.m-1
           label.form-label(for='title') Title
           input.form-control#title(type='text' name='title')
+          div(
+            class='text-danger'
+          )= errors && errors.title ? errors.title.msg : ''
         div.m-1
           label.form-label(for='text') Message
           textarea(rows='8').form-control#text(name='text')
+          div(
+            class='text-danger'
+          )= errors && errors.text ? errors.text.msg : ''
         div.m-1
           button.btn.btn-primary(type='submit') Submit
   else

@@ -5,7 +5,7 @@ const Message = require('../models/message');
 exports.getIndex = asyncHandler(async (req, res, next) => {
   try {
     const messages = await Message.find({}).populate('user');
-    res.render('index', { messages, title: 'Members Only', user: req.user });
+    res.render('index', { messages, user: req.user });
   } catch (err) {
     next(err);
   }
@@ -21,7 +21,7 @@ exports.postIndex = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       try {
-        const messages = await Message.find({}, 'text title');
+        const messages = await Message.find({});
         res.render('index', {
           errors: errors.mapped(),
           messages,
