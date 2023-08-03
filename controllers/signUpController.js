@@ -55,6 +55,7 @@ exports.postSignUpForm = [
 
   asyncHandler(async (req, res, next) => {
     const newUser = new User({
+      admin: false,
       email: req.body.email,
       firstName: req.body.firstName,
       lastName: req.body.lastName,

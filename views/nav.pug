@@ -7,6 +7,10 @@ nav(data-bs-theme='dark').navbar.navbar-expand.bg-dark
         if !user.member
           li.nav-item
             a.nav-link(href='/join') Join Club
+        else
+          if !user.admin
+            li.nav-item
+              a.nav-link(href='/admin') Become Admin 
         li.nav-item
           form(action='/logout' method='POST')
             button.nav-link(type='submit') Log Out
@@ -16,8 +20,11 @@ nav(data-bs-theme='dark').navbar.navbar-expand.bg-dark
         li.nav-item
           a.nav-link(href='/signup') Sign Up
     if user
-      div.text-warning.navbar-text
+      div.navbar-text
         if user.member
-          span= `★ ${user.fullName}`
+          if user.admin
+            span.text-info= `♛ ${user.fullName}`
+          else
+            span.text-warning= `★ ${user.fullName}`
         else
-          span= user.fullName
+          span.text-white-50= user.fullName

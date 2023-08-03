@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Become Admin 
+  div.container-fluid.shadow.bg-white.rounded-3.p-2
+    form(action='' method='POST')
+      div.m-1
+        label.form-label(for='password') Enter secret passcode
+        input(
+          class= errors && errors.password ? 'is-invalid' : null
+          name='password'
+          type='password'
+        ).form-control
+        div(
+          class='text-danger p-1 rounded-3'
+        )= errors && errors.password ? errors.password.msg : ''
+      div.m-1
+        button.btn.btn-primary(type='submit') Submit
