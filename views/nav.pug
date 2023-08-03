@@ -10,8 +10,12 @@ nav(data-bs-theme='dark').navbar.navbar-expand.bg-dark
         li.nav-item
           form(action='/logout' method='POST')
             button.nav-link(type='submit') Log Out
+        li.nav-item
+          div.navbar-text= user.fullName
       else
         li.nav-item
           a.nav-link(href='/login') Log In
         li.nav-item
           a.nav-link(href='/signup') Sign Up
+    if user && user.member
+      div.text-warning.navbar-text ★

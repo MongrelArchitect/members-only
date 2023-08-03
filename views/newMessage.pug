@@ -1,0 +1,22 @@
+div.container-fluid.shadow.bg-white.rounded-3
+  if user
+    fieldset.m-1
+      legend New Message
+      form(action='' method='POST')
+        div.m-1
+          label.form-label(for='title') Title
+          input.form-control#title(type='text' name='title')
+        div.m-1
+          label.form-label(for='text') Message
+          textarea(rows='8').form-control#text(name='text')
+        div.m-1
+          button.btn.btn-primary(type='submit') Submit
+  else
+    div.m-1.p-3
+      div.h4 New Message
+      a(href='/login').btn.btn-primary  Log in
+      |
+      | or
+      |
+      |
+      a(href='/signup').btn.btn-primary Sign up
