@@ -10,6 +10,9 @@ exports.getLoginForm = (req, res, next) => {
     res.render('loginForm', {
       // give it the same error message structure as express-validator
       errors: flash && flash.error ? { auth: { msg: flash.error } } : null,
+      // passport strategy uses flash messages for prior form data
+      email: flash && flash.email ? flash.email[0] : '',
+      password: flash && flash.password ? flash.password[0] : '',
     });
   }
 };

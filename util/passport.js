@@ -5,17 +5,21 @@ const User = require('../models/user');
 module.exports = function setupPassport(passport) {
   passport.use(
     new LocalStrategy(
-      { usernameField: 'email' },
-      async (email, password, done) => {
+      { passReqToCallback: true, usernameField: 'email' },
+      async (req, email, password, done) => {
         const user = await User.findOne({ email });
         try {
           if (!user) {
+            req.flash('email', req.body.email);
+            req.flash('password', req.body.password);
             return done(null, false, {
               message: 'Email or password is incorrect',
             });
           }
           const correctPassword = await bcrypt.compare(password, user.password);
           if (!correctPassword) {
+            req.flash('email', req.body.email);
+            req.flash('password', req.body.password);
             return done(null, false, {
               message: 'Email or password is incorrect',
             });

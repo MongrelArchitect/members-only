@@ -5,7 +5,6 @@ const Message = require('../models/message');
 exports.getIndex = asyncHandler(async (req, res, next) => {
   try {
     const messages = await Message.find({}).populate('user');
-    console.log(messages);
     res.render('index', { messages, title: 'Members Only', user: req.user });
   } catch (err) {
     next(err);

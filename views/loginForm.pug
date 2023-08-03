@@ -2,18 +2,32 @@ extends layout
 
 block content
   h1 Login
-  form(action='' method='POST')
-    label(for='email') Email
-      input#email(
-        name='email'
-        type='email'
-      )
-      div= errors && errors.email ? errors.email.msg : ''
-    label(for='password') Password 
-      input#password(
-        name='password'
-        type='password'
-      )
-      div= errors && errors.password ? errors.password.msg : ''
-    div= errors && errors.auth ? errors.auth.msg : ''
-    button(type='submit') Submit
+  div.container-fluid.shadow.bg-white.rounded-3.p-2
+    form(action='' method='POST')
+      div.m-1
+        label.form-label(for='email') Email
+        input(
+          class= errors && errors.email ? 'is-invalid' : null
+          name='email'
+          type='email'
+          value= email
+        ).form-control#email
+        div(
+          class='text-danger p-1 rounded-3'
+        )= errors && errors.email ? errors.email.msg : ''
+      div.m-1
+        label.form-label(for='password') Password 
+        input.form-control#password(
+          class= errors && errors.password ? 'is-invalid' : null
+          name='password'
+          type='password'
+          value= password
+        )
+        div(
+          class='text-danger p-1 rounded-3'
+        )= errors && errors.password ? errors.password.msg : ''
+      div.m-1
+        div(
+          class='text-danger p-1 rounded-3'
+        )= errors && errors.auth ? errors.auth.msg : ''
+        button.btn.btn-primary(type='submit') Submit
