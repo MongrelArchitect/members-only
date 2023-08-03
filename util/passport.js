@@ -10,11 +10,15 @@ module.exports = function setupPassport(passport) {
         const user = await User.findOne({ email });
         try {
           if (!user) {
-            return done(null, false, { message: 'No such user' });
+            return done(null, false, {
+              message: 'Email or password is incorrect',
+            });
           }
           const correctPassword = await bcrypt.compare(password, user.password);
           if (!correctPassword) {
-            return done(null, false, { message: 'Incorrect password' });
+            return done(null, false, {
+              message: 'Email or password is incorrect',
+            });
           }
           return done(null, user);
         } catch (err) {
