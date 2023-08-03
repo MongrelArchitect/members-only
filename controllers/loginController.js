@@ -1,4 +1,3 @@
-const asyncHandler = require('express-async-handler');
 const passport = require('passport');
 const { body, validationResult } = require('express-validator');
 
@@ -27,9 +26,7 @@ exports.postLoginForm = [
 
   body('password', 'Password required').notEmpty(),
 
-  // XXX
-  // Do we need this asyncHandler here? No database calls or anything...
-  asyncHandler(async (req, res, next) => {
+  (req, res, next) => {
     // check for errors in validation
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -41,7 +38,7 @@ exports.postLoginForm = [
     } else {
       next();
     }
-  }),
+  },
 
   passport.authenticate('local', {
     failureRedirect: '/login',
