@@ -4,5 +4,7 @@ block content
   h1= title
   if user
     p Welcome, #{user.fullName}.
+    if user.member
+      p You're a club member! Good times.
   else
     p Welcome to #{title}

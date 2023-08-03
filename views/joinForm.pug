@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 Join Club
+  form(action='' method='POST')
+    label(for='password') Enter secret passcode
+      input(type='password' name='password')
+      div= errors && errors.password ? errors.password.msg : ''
+    button(type='submit') Submit
