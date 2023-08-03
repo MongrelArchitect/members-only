@@ -31,7 +31,16 @@ exports.postSignUpForm = [
     .isLength({ max: 255 })
     .withMessage('255 characters maximum'),
 
-  body('email', 'Valid email address required').trim().escape().isEmail(),
+  body('email', 'Valid email address required')
+    .trim()
+    .escape()
+    .isEmail()
+    .custom(async (value) => {
+      const existingUser = await User.findOne({ email: value });
+      if (existingUser) {
+        throw new Error('Email already in use');
+      }
+    }),
 
   body('password', 'Password does not meet requirements')
     .notEmpty()

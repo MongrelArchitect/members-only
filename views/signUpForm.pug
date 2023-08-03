@@ -2,48 +2,70 @@ extends layout
 
 block content
   h1 Sign-Up
-  form(action='' method='POST')
-    label(for='firstName') First Name
-      input#firstName(
-        name='firstName' 
-        type='text' 
-        value= newUser ? newUser.firstName : ''
-      )
-      div= errors && errors.firstName ? errors.firstName.msg : ''
-    label(for='lastName') Last Name
-      input#lastName(
-        name='lastName' 
-        type='text' 
-        value= newUser ? newUser.lastName : ''
-      )
-      div= errors && errors.lastName ? errors.lastName.msg : ''
-    label(for='email') Email
-      input#email(
-        name='email' 
-        type='email' 
-        value= newUser ? newUser.email : ''
-      )
-      div= errors && errors.email ? errors.email.msg : ''
-    label(for='password') Password
-      ul#passwordRequirements(aria-label='password requirements')
-        li 8 characters minimum
-        li At least 1 lowercase letter
-        li At least 1 uppercase letter
-        li At least 1 number
-        li At least 1 symbol
-      -// '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9]).{8,}$'
-      input#password(
-        aria-describedby='passwordRequirements'
-        name='password' 
-        type='password' 
-        value= newUser ? newUser.password : ''
-      )
-      div= errors && errors.password ? errors.password.msg : ''
-    label(for='passwordConfirm') Confirm Password
-      input#passwordConfirm(
-        name='passwordConfirm' 
-        type='password' 
-        value= passwordConfirm || ''
-      )
-      div= errors && errors.passwordConfirm ? errors.passwordConfirm.msg : ''
-    button(type='submit') Submit
+  div.container-fluid.shadow.bg-white.rounded-3.p-2
+    form(action='' method='POST')
+      div.m-1
+        label.form-label(for='firstName') First Name
+        input.form-control#firstName(
+          class= errors && errors.firstName ? 'is-invalid' : null
+          name='firstName' 
+          type='text' 
+          value= newUser ? newUser.firstName : ''
+        )
+        div(
+          class='text-danger p-1 rounded-3'
+        )= errors && errors.firstName ? errors.firstName.msg : ''
+      div.m-1
+        label.form-label(for='lastName') Last Name
+        input.form-control#lastName(
+          class= errors && errors.lastName ? 'is-invalid' : null
+          name='lastName' 
+          type='text' 
+          value= newUser ? newUser.lastName : ''
+        )
+        div(
+          class='text-danger p-1 rounded-3'
+        )= errors && errors.lastName ? errors.lastName.msg : ''
+      div.m-1
+        label.form-label(for='email') Email
+        input.form-control#email(
+          class= errors && errors.email ? 'is-invalid' : null
+          name='email' 
+          type='email' 
+          value= newUser ? newUser.email : ''
+        )
+        div(
+          class='text-danger p-1 rounded-3'
+        )= errors && errors.email ? errors.email.msg : ''
+      div.m-1
+        label.form-label(for='password') Password
+        ul#passwordRequirements(aria-label='password requirements')
+          li 8 characters minimum
+          li At least 1 lowercase letter
+          li At least 1 uppercase letter
+          li At least 1 number
+          li At least 1 symbol
+        -// '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9]).{8,}$'
+        input.form-control#password(
+          aria-describedby='passwordRequirements'
+          class= errors && errors.password ? 'is-invalid' : null
+          name='password' 
+          type='password' 
+          value= newUser ? newUser.password : ''
+        )
+        div(
+          class='text-danger p-1 rounded-3'
+        )= errors && errors.password ? errors.password.msg : ''
+      div.m-1
+        label.form-label(for='passwordConfirm') Confirm Password
+        input.form-control#passwordConfirm(
+          name='passwordConfirm' 
+          class= errors && errors.passwordConfirm ? 'is-invalid' : null
+          type='password' 
+          value= passwordConfirm || ''
+        )
+        div(
+          class='text-danger p-1 rounded-3'
+        )= errors && errors.passwordConfirm ? errors.passwordConfirm.msg : ''
+      div.m-1
+        button.btn.btn-primary(type='submit') Submit
