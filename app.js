@@ -12,6 +12,7 @@ require('dotenv').config();
 const indexRouter = require('./routes/index');
 const signupRouter = require('./routes/signUp');
 const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
 
 // set up mongoose
 mongoose.set('strictQuery', true);
@@ -51,8 +52,9 @@ app.use(passport.session());
 app.use(flash());
 
 app.use('/', indexRouter);
-app.use('/sign-up', signupRouter);
+app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

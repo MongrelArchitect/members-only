@@ -4,11 +4,15 @@ const { body, validationResult } = require('express-validator');
 
 // GET request for login form
 exports.getLoginForm = (req, res, next) => {
-  const errorMessage = req.session.flash.error;
-  res.render('loginForm', {
-    // give it the same error message structure as express-validator
-    errors: errorMessage ? { auth: { msg: errorMessage } } : null,
-  });
+  if (req.user) {
+    res.redirect('/');
+  } else {
+    const { flash } = req.session;
+    res.render('loginForm', {
+      // give it the same error message structure as express-validator
+      errors: flash && flash.error ? { auth: { msg: flash.error } } : null,
+    });
+  }
 };
 
 // POST request for login form
@@ -23,6 +27,8 @@ exports.postLoginForm = [
 
   body('password', 'Password required').notEmpty(),
 
+  // XXX
+  // Do we need this asyncHandler here? No database calls or anything...
   asyncHandler(async (req, res, next) => {
     // check for errors in validation
     const errors = validationResult(req);

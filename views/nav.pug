@@ -1,0 +1,17 @@
+nav(data-bs-theme='dark').navbar.navbar-expand.bg-dark
+  div.container-fluid
+    ul.navbar-nav
+      li.nav-item
+        a.nav-link(href='/') Home
+      if user
+        if !user.member
+          li.nav-item
+            a.nav-link(href='/join') Join Club
+        li.nav-item
+          form(action='/logout' method='POST')
+            button.nav-link(type='submit') Log Out
+      else
+        li.nav-item
+          a.nav-link(href='/login') Log In
+        li.nav-item
+          a.nav-link(href='/signup') Sign Up

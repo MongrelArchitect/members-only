@@ -5,7 +5,11 @@ const User = require('../models/user');
 
 // GET request for sign up form
 exports.getSignUpForm = (req, res, next) => {
-  res.render('signUpForm');
+  if (req.user) {
+    res.redirect('/');
+  } else {
+    res.render('signUpForm');
+  }
 };
 
 // POST request for sign up form
