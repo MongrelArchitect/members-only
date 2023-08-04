@@ -5,29 +5,40 @@ block content
   div.container-fluid.shadow.bg-white.rounded-3.p-2
     form(action='' method='POST')
       div.m-1
-        label.form-label(for='email') Email
-        input(
-          class= errors && errors.email ? 'is-invalid' : null
-          name='email'
-          type='email'
-          value= email
-        ).form-control#email
-        div(
-          class='text-danger p-1 rounded-3'
+        div.form-floating
+          input(
+            aria-describedby='emailError'
+            class= errors ? errors.email ? 'is-invalid' : 'is-valid' : null
+            name='email'
+            placeholder='Required'
+            required
+            type='email'
+            value= email
+          ).form-control#email
+          label.form-label(for='email') Email
+        div#emailError(
+          aria-live='polite'
+          class='text-danger m-1'
         )= errors && errors.email ? errors.email.msg : ''
       div.m-1
-        label.form-label(for='password') Password 
-        input.form-control#password(
-          class= errors && errors.password ? 'is-invalid' : null
-          name='password'
-          type='password'
-          value= password
-        )
-        div(
-          class='text-danger p-1 rounded-3'
+        div.form-floating
+          input.form-control#password(
+            aria-describedby='passwordError'
+            class= errors ? errors.password ? 'is-invalid' : 'is-valid' : null
+            name='password'
+            placeholder='Required'
+            required
+            type='password'
+            value= password
+          )
+          label.form-label(for='password') Password 
+        div#passwordError(
+          aria-live='polite'
+          class='text-danger m-1'
         )= errors && errors.password ? errors.password.msg : ''
       div.m-1
-        div(
-          class='text-danger p-1 rounded-3'
+        div#authError(
+          class='text-danger m-1'
         )= errors && errors.auth ? errors.auth.msg : ''
-        button.btn.btn-primary(type='submit') Submit
+        button#submit.btn.btn-secondary(type='submit') Submit
+  script(src='/javascripts/validateLogin.js')

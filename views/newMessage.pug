@@ -24,6 +24,7 @@ div.container-fluid.shadow.bg-white.rounded-3
         div.m-1
           div.form-floating
             textarea.form-control#text(
+              aria-describedby='textError'
               class= errors ? errors.text ? 'is-invalid' : 'is-valid' : ''
               maxlength='500' 
               minlength='1'
@@ -43,7 +44,6 @@ div.container-fluid.shadow.bg-white.rounded-3
             span  / 500 characters
         div.m-1
           button#submit.btn.btn-secondary(
-            disabled 
             type='submit'
           ) Submit
     script(src='/javascripts/validateMessage.js')

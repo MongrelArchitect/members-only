@@ -9,11 +9,9 @@ function validateMessage() {
     const title = document.querySelector('#title');
     const submit = document.querySelector('#submit');
     if (text.validity.valid && title.validity.valid) {
-      submit.removeAttribute('disabled');
       submit.classList.remove('btn-secondary');
       submit.classList.add('btn-primary');
     } else {
-      submit.setAttribute('disabled', true);
       submit.classList.remove('btn-primary');
       submit.classList.add('btn-secondary');
     }
