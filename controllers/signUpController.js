@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const passport = require('passport');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
@@ -81,7 +82,7 @@ exports.postSignUpForm = [
             // use hashed password & save new user to database
             newUser.password = hashedPass;
             await newUser.save();
-            res.send('SUCCESS!');
+            next();
           } catch (err) {
             // problem saving user to database
             next(err);
@@ -89,5 +90,11 @@ exports.postSignUpForm = [
         }
       });
     }
+  }),
+
+  passport.authenticate('local', {
+    failureRedirect: '/login',
+    failureFlash: true,
+    successRedirect: '/',
   }),
 ];
