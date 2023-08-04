@@ -4,19 +4,49 @@ div.container-fluid.shadow.bg-white.rounded-3
       legend New Message
       form(action='' method='POST')
         div.m-1
-          label.form-label(for='title') Title
-          input.form-control#title(type='text' name='title')
-          div(
+          div.form-floating
+            input.form-control#title(
+              aria-describedby='titleError'
+              class= errors ? errors.title ? 'is-invalid' : 'is-valid' : ''
+              maxlength='50' 
+              minlength='1'
+              name='title'
+              placeholder='Required'
+              required
+              type='text' 
+              value= newMessage ? newMessage.title : ''
+            )
+            label.form-label(for='title') Title
+          div#titleError(
+            aria-live='polite'
             class='text-danger'
           )= errors && errors.title ? errors.title.msg : ''
         div.m-1
-          label.form-label(for='text') Message
-          textarea(rows='8').form-control#text(name='text')
-          div(
+          div.form-floating
+            textarea.form-control#text(
+              class= errors ? errors.text ? 'is-invalid' : 'is-valid' : ''
+              maxlength='500' 
+              minlength='1'
+              name='text'
+              placeholder='Required'
+              required
+              style='height: 12rem'
+            )= newMessage ? newMessage.text : ''
+            label.form-label(for='text') Message
+          div#textError(
+            aria-live='polite'
             class='text-danger'
           )= errors && errors.text ? errors.text.msg : ''
+          div.text-end.font-monospace.m-1(aria-live='polite')
+            span#charCount 000
+            |
+            span  / 500 characters
         div.m-1
-          button.btn.btn-primary(type='submit') Submit
+          button#submit.btn.btn-secondary(
+            disabled 
+            type='submit'
+          ) Submit
+    script(src='/javascripts/validateMessage.js')
   else
     div.m-1.p-3
       div.h4 New Message
