@@ -5,67 +5,101 @@ block content
   div.container-fluid.shadow.bg-white.rounded-3.p-2
     form(action='' method='POST')
       div.m-1
-        label.form-label(for='firstName') First Name
-        input.form-control#firstName(
-          class= errors && errors.firstName ? 'is-invalid' : null
-          name='firstName' 
-          type='text' 
-          value= newUser ? newUser.firstName : ''
-        )
-        div(
-          class='text-danger p-1 rounded-3'
+        div.form-floating
+          input.form-control#firstName(
+            aria-describedby='firstNameError'
+            class= errors ? errors.firstName ? 'is-invalid' : 'is-valid' : null
+            maxlength='255'
+            minlength='1'
+            name='firstName' 
+            placeholder='Required'
+            required
+            type='text' 
+            value= newUser ? newUser.firstName : ''
+          )
+          label.form-label(for='firstName') First Name
+        div#firstNameError(
+          aria-live='polite'
+          class='text-danger m-1'
         )= errors && errors.firstName ? errors.firstName.msg : ''
       div.m-1
-        label.form-label(for='lastName') Last Name
-        input.form-control#lastName(
-          class= errors && errors.lastName ? 'is-invalid' : null
-          name='lastName' 
-          type='text' 
-          value= newUser ? newUser.lastName : ''
-        )
-        div(
-          class='text-danger p-1 rounded-3'
+        div.form-floating
+          input.form-control#lastName(
+            aria-describedby='lastNameError'
+            class= errors ? errors.lastName ? 'is-invalid' : 'is-valid' : null
+            maxlength='255'
+            minlength='1'
+            name='lastName' 
+            placeholder='Required'
+            required
+            type='text' 
+            value= newUser ? newUser.lastName : ''
+          )
+          label.form-label(for='lastName') Last Name
+        div#lastNameError(
+          aria-live='polite'
+          class='text-danger m-1'
         )= errors && errors.lastName ? errors.lastName.msg : ''
       div.m-1
-        label.form-label(for='email') Email
-        input.form-control#email(
-          class= errors && errors.email ? 'is-invalid' : null
-          name='email' 
-          type='email' 
-          value= newUser ? newUser.email : ''
-        )
-        div(
-          class='text-danger p-1 rounded-3'
+        div.form-floating
+          input.form-control#email(
+            aria-describedby='emailError'
+            class= errors ? errors.email ? 'is-invalid' : 'is-valid' : null
+            maxlength='254'
+            minlength='1'
+            name='email' 
+            placeholder='Required'
+            required
+            type='email' 
+            value= newUser ? newUser.email : ''
+          )
+          label.form-label(for='email') Email
+        div#emailError(
+          aria-live='polite'
+          class='text-danger m-1'
         )= errors && errors.email ? errors.email.msg : ''
       div.m-1
-        label.form-label(for='password') Password
-        ul#passwordRequirements(aria-label='password requirements')
-          li 8 characters minimum
-          li At least 1 lowercase letter
-          li At least 1 uppercase letter
-          li At least 1 number
-          li At least 1 symbol
-        -// '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9]).{8,}$'
-        input.form-control#password(
-          aria-describedby='passwordRequirements'
-          class= errors && errors.password ? 'is-invalid' : null
-          name='password' 
-          type='password' 
-          value= newUser ? newUser.password : ''
-        )
-        div(
-          class='text-danger p-1 rounded-3'
+        div.form-floating
+          input.form-control#password(
+            aria-describedby='passwordError passwordRequirements'
+            class= errors ? errors.password ? 'is-invalid' : 'is-valid' : null
+            minlength='1'
+            name='password' 
+            pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9]).{8,}$'
+            placeholder='Required'
+            required
+            title='8 characters minimum, 1 uppercase, 1 lowercase, 1 number, 1 symbol'
+            type='password' 
+            value= newUser ? newUser.password : ''
+          )
+          label.form-label(for='password') Password
+        ul#passwordRequirements.m-1(aria-label='password requirements')
+          li#minimumChar 8 characters minimum
+          li#uppercase 1 uppercase letter
+          li#lowercase 1 lowercase letter
+          li#number 1 number
+          li#symbol 1 symbol (@, !, #, etc)
+        div#passwordError(
+          aria-live='polite'
+          class='text-danger m-1'
         )= errors && errors.password ? errors.password.msg : ''
       div.m-1
-        label.form-label(for='passwordConfirm') Confirm Password
-        input.form-control#passwordConfirm(
-          name='passwordConfirm' 
-          class= errors && errors.passwordConfirm ? 'is-invalid' : null
-          type='password' 
-          value= passwordConfirm || ''
-        )
-        div(
-          class='text-danger p-1 rounded-3'
+        div.form-floating
+          input.form-control#passwordConfirm(
+            aria-describedby='passwordConfirmError'
+            minlength='1'
+            name='passwordConfirm' 
+            class= errors ? errors.passwordConfirm ? 'is-invalid' : 'is-valid' : null
+            placeholder='Required'
+            required
+            type='password' 
+            value= passwordConfirm || ''
+          )
+          label.form-label(for='passwordConfirm') Confirm Password
+        div#passwordConfirmError(
+          aria-live='polite'
+          class='text-danger m-1'
         )= errors && errors.passwordConfirm ? errors.passwordConfirm.msg : ''
       div.m-1
-        button.btn.btn-primary(type='submit') Submit
+        button#submit.btn.btn-secondary(type='submit') Submit
+  script(src='/javascripts/validateSignup.js')

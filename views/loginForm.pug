@@ -6,7 +6,7 @@ block content
     form(action='' method='POST')
       div.m-1
         div.form-floating
-          input(
+          input.form-control#email(
             aria-describedby='emailError'
             class= errors ? errors.email ? 'is-invalid' : 'is-valid' : null
             name='email'
@@ -14,7 +14,7 @@ block content
             required
             type='email'
             value= email
-          ).form-control#email
+          )
           label.form-label(for='email') Email
         div#emailError(
           aria-live='polite'

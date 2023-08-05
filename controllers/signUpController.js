@@ -35,6 +35,10 @@ exports.postSignUpForm = [
   body('email', 'Valid email address required')
     .trim()
     .escape()
+    .isLength({ min: 3 })
+    .withMessage('3 characters minimum')
+    .isLength({ max: 254 })
+    .withMessage('254 characters maximum')
     .isEmail()
     .custom(async (value) => {
       const existingUser = await User.findOne({ email: value });
