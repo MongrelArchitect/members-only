@@ -32,6 +32,11 @@ block content
             value= password
           )
           label.form-label(for='password') Password 
+        button#togglePassword(
+          type='button'
+        ).btn.d-flex.align-items-center.gap-2.mt-1.btn-light
+          img#toggleImage(height='22px' src='/images/eye.svg') 
+          span#toggleText Show password
         div#passwordError(
           aria-live='polite'
           class='text-danger m-1'

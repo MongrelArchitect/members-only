@@ -84,6 +84,27 @@ function validateSignup() {
     errorMessage.className = 'text-success';
   };
 
+  const togglePassword = () => {
+    const toggle = document.querySelector('#togglePassword');
+    toggle.addEventListener('click', () => {
+      const password = document.querySelector('#password');
+      const passwordConfirm = document.querySelector('#passwordConfirm');
+      const image = document.querySelector('#toggleImage');
+      const text = document.querySelector('#toggleText');
+      if (password.type === 'password') {
+        password.type = 'text';
+        passwordConfirm.type = 'text';
+        image.setAttribute('src', '/images/eye-slash.svg');
+        text.textContent = 'Hide passwords';
+      } else {
+        password.type = 'password';
+        passwordConfirm.type = 'password';
+        image.setAttribute('src', '/images/eye.svg');
+        text.textContent = 'Show passwords';
+      }
+    });
+  };
+
   const validateFirstName = () => {
     const firstName = document.querySelector('#firstName');
     const firstNameError = document.querySelector('#firstNameError');
@@ -212,6 +233,7 @@ function validateSignup() {
     });
   };
 
+  togglePassword();
   setSubmit();
   validateFirstName();
   validateLastName();

@@ -73,6 +73,11 @@ block content
             value= newUser ? newUser.password : ''
           )
           label.form-label(for='password') Password
+        button#togglePassword(
+          type='button'
+        ).btn.d-flex.align-items-center.gap-2.mt-1.btn-light
+          img#toggleImage(height='22px' src='/images/eye.svg') 
+          span#toggleText Show passwords
         ul#passwordRequirements.m-1(aria-label='password requirements')
           li#minimumChar 8 characters minimum
           li#uppercase 1 uppercase letter
