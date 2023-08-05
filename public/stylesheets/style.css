@@ -1,0 +1,9 @@
+footer img {
+  height: 28px;
+  filter: invert(0.5);
+}
+
+footer img:hover,
+footer img:focus {
+  filter: invert(0.8);
+}
