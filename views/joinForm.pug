@@ -5,14 +5,26 @@ block content
   div.container-fluid.shadow.bg-white.rounded-3.p-2
     form(action='' method='POST')
       div.m-1
-        label.form-label(for='password') Enter secret passcode
-        input(
-          class= errors && errors.password ? 'is-invalid' : null
-          name='password'
-          type='password'
-        ).form-control
-        div(
-          class='text-danger p-1 rounded-3'
-        )= errors && errors.password ? errors.password.msg : ''
+        div.form-floating
+          input#password(
+            aria-describedby='passwordError'
+            class= errors ? errors.password ? 'is-invalid' : 'is-valid' : null
+            placeholder='Required'
+            minlength='1'
+            name='password'
+            required
+            type='password'
+          ).form-control
+          label.form-label(for='password') Password
+      button#togglePassword(
+        type='button'
+      ).btn.d-flex.align-items-center.gap-2.mt-1.btn-light
+        img#toggleImage(height='22px' src='/images/eye.svg') 
+        span#toggleText Show password
+      div#passwordError(
+        aria-live='polite'
+        class='text-danger p-1 rounded-3'
+      )= errors && errors.password ? errors.password.msg : ''
       div.m-1
-        button.btn.btn-primary(type='submit') Submit
+        button#submit.btn.btn-secondary(type='submit') Submit
+  script(src='/javascripts/validateJoin.js')

@@ -10,7 +10,7 @@ exports.getJoin = (req, res, next) => {
 };
 
 exports.postJoin = [
-  body('password', 'Passcode required').notEmpty(),
+  body('password', 'Password required').notEmpty(),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
