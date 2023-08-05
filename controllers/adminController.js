@@ -6,11 +6,11 @@ exports.getAdmin = (req, res, next) => {
   if (!req.user || !req.user.member || req.user.admin) {
     res.redirect('/');
   }
-  res.render('joinForm', { user: req.user });
+  res.render('adminForm', { user: req.user });
 };
 
 exports.postAdmin = [
-  body('password', 'Passcode required').notEmpty(),
+  body('password', 'Password required').notEmpty(),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);

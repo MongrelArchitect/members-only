@@ -9,9 +9,9 @@ block content
           input#password(
             aria-describedby='passwordError'
             class= errors ? errors.password ? 'is-invalid' : 'is-valid' : null
-            placeholder='Required'
             minlength='1'
             name='password'
+            placeholder='Required'
             required
             type='password'
           ).form-control
@@ -23,7 +23,7 @@ block content
         span#toggleText Show password
       div#passwordError(
         aria-live='polite'
-        class='text-danger p-1 rounded-3'
+        class='text-danger m-1'
       )= errors && errors.password ? errors.password.msg : ''
       div.m-1
         button#submit.btn.btn-secondary(type='submit') Submit
