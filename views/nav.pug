@@ -9,6 +9,7 @@ nav(data-bs-theme='dark').navbar.navbar-expand-sm.bg-dark.sticky-top
       aria-label='Toggle navigation'
     ).navbar-toggler
       span.navbar-toggler-icon
+    a(href='#').navbar-brand Members Only
     div#navbarCollapse.collapse.navbar-collapse
       ul.navbar-nav
         li.nav-item
@@ -29,12 +30,12 @@ nav(data-bs-theme='dark').navbar.navbar-expand-sm.bg-dark.sticky-top
             a.nav-link(href='/login') Log In
           li.nav-item
             a.nav-link(href='/signup') Sign Up
-    if user
-      div.navbar-text
-        if user.member
-          if user.admin
-            span.text-info= `♛ ${user.fullName}`
+      if user
+        div.navbar-text
+          if user.member
+            if user.admin
+              span.text-warning= `♛ ${user.fullName}`
+            else
+              span.text-info= `★ ${user.fullName}`
           else
-            span.text-warning= `★ ${user.fullName}`
-        else
-          span.text-white-50= user.fullName
+            span.text-white= user.fullName
