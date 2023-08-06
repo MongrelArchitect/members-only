@@ -1,24 +1,34 @@
-nav(data-bs-theme='dark').navbar.navbar-expand.bg-dark.sticky-top
+nav(data-bs-theme='dark').navbar.navbar-expand-sm.bg-dark.sticky-top
   div.container-fluid
-    ul.navbar-nav
-      li.nav-item
-        a.nav-link(href='/') Home
-      if user
-        if !user.member
-          li.nav-item
-            a.nav-link(href='/join') Join Club
-        else
-          if !user.admin
+    button(
+      type='button'
+      data-bs-toggle='collapse'
+      data-bs-target='#navbarCollapse'
+      aria-controls='navbarCollapse'
+      aria-expanded='false'
+      aria-label='Toggle navigation'
+    ).navbar-toggler
+      span.navbar-toggler-icon
+    div#navbarCollapse.collapse.navbar-collapse
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link(href='/') Home
+        if user
+          if !user.member
             li.nav-item
-              a.nav-link(href='/admin') Become Admin 
-        li.nav-item
-          form(action='/logout' method='POST')
-            button.nav-link(type='submit') Log Out
-      else
-        li.nav-item
-          a.nav-link(href='/login') Log In
-        li.nav-item
-          a.nav-link(href='/signup') Sign Up
+              a.nav-link(href='/join') Join Club
+          else
+            if !user.admin
+              li.nav-item
+                a.nav-link(href='/admin') Become Admin 
+          li.nav-item
+            form(action='/logout' method='POST')
+              button.nav-link(type='submit') Log Out
+        else
+          li.nav-item
+            a.nav-link(href='/login') Log In
+          li.nav-item
+            a.nav-link(href='/signup') Sign Up
     if user
       div.navbar-text
         if user.member
