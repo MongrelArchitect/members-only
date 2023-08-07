@@ -3,6 +3,7 @@ const createError = require('http-errors');
 const express = require('express');
 const flash = require('express-flash');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const passport = require('passport');
 const logger = require('morgan');
 const mongoose = require('mongoose');
@@ -26,6 +27,10 @@ async function connectMongoDB() {
 connectMongoDB().catch((err) => console.error(err));
 
 const app = express();
+const store = new MongoDBStore({
+  uri: process.env.ATLAS,
+  collection: 'sessions',
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +45,7 @@ setupPassport(passport);
 
 app.use(
   session({
+    store,
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
