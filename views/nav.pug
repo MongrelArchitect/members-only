@@ -34,8 +34,9 @@ nav(data-bs-theme='dark').navbar.navbar-expand-sm.bg-dark.sticky-top
         div.navbar-text
           if user.member
             if user.admin
-              span.text-warning= `♛ ${user.fullName}`
+              span.text-info= `♛ ${user.fullName}`
             else
-              span.text-info= `★ ${user.fullName}`
+              span.text-success-emphasis= `★ ${user.fullName}`
           else
-            span.text-white= user.fullName
+            span.text-warning-emphasis= user.fullName
+  script(src='/javascripts/activeLinks.js')
